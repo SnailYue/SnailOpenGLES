@@ -21,5 +21,10 @@ class RectangleActivity : AppCompatActivity() {
             intent.putExtra("name", Triangle::class.java)
             startActivity(intent)
         }
+        bt_equilateral_triangle?.setOnClickListener {
+            var intent = Intent(this, RectangleRenderActivity::class.java)
+            intent.putExtra("name", EquilateralTriangle::class.java)
+            startActivity(intent)
+        }
     }
 }

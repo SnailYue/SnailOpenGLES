@@ -125,7 +125,7 @@ class Cube : Shape {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        var ratio: Float = (width as Float) / height
+        var ratio: Float = width.toFloat() / height
         Matrix.frustumM(mProjectMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 20f)
         Matrix.setLookAtM(mViewMatrix, 0, 5f, 5f, 10f, 0f, 0f, 0f, 0f, 1f, 0f)
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectMatrix, 0, mViewMatrix, 0)
