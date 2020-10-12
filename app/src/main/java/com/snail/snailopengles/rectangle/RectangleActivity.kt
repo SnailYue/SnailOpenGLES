@@ -31,5 +31,10 @@ class RectangleActivity : AppCompatActivity() {
             intent.putExtra("name", EquilateralTriangleColor::class.java)
             startActivity(intent)
         }
+        bt_square?.setOnClickListener {
+            var intent = Intent(this, RectangleRenderActivity::class.java)
+            intent.putExtra("name", Square::class.java)
+            startActivity(intent)
+        }
     }
 }
