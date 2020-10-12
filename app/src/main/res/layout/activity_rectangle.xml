@@ -22,5 +22,12 @@
         android:layout_marginTop="20dp"
         android:text="等边三角形" />
 
+    <Button
+        android:id="@+id/bt_equilateral_triangle_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="彩色等边三角形" />
 
 </LinearLayout>

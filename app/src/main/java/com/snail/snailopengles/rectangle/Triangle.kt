@@ -11,16 +11,18 @@ import javax.microedition.khronos.opengles.GL10
 class Triangle : Shape {
 
     private var vertexBuffer: FloatBuffer? = null
-    private val vertexShaderCode = "attribute vec4 vPosition;" +
-            "void main() {" +
-            "  gl_Position = vPosition;" +
-            "}"
+    private val vertexShaderCode =
+        "attribute vec4 vPosition;" +
+                "void main() {" +
+                "  gl_Position = vPosition;" +
+                "}"
 
-    private val fragmentShaderCode = "precision mediump float;" +
-            "uniform vec4 vColor;" +
-            "void main() {" +
-            "  gl_FragColor = vColor;" +
-            "}"
+    private val fragmentShaderCode =
+        "precision mediump float;" +
+                "uniform vec4 vColor;" +
+                "void main() {" +
+                "  gl_FragColor = vColor;" +
+                "}"
 
     private var mProgram = 0
     val COORDS_PER_VERTEX = 3
