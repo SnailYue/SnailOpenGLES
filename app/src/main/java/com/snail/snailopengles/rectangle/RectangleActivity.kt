@@ -39,6 +39,9 @@ class RectangleActivity : AppCompatActivity() {
         bt_cylinder?.setOnClickListener {
             startActivity(Cylinder::class.java)
         }
+        bt_ball?.setOnClickListener {
+            startActivity(Ball::class.java)
+        }
     }
 
     /**
