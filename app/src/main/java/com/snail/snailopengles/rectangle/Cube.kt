@@ -12,9 +12,9 @@ import javax.microedition.khronos.opengles.GL10
 
 class Cube : Shape {
 
-    private lateinit var vertexBuffer: FloatBuffer
-    private lateinit var colorBuffer: FloatBuffer
-    private lateinit var indexBuffer: ShortBuffer
+    private var vertexBuffer: FloatBuffer
+    private var colorBuffer: FloatBuffer
+    private var indexBuffer: ShortBuffer
     private val vertexShaderCode = "attribute vec4 vPosition;" +
             "uniform mat4 vMatrix;" +
             "varying  vec4 vColor;" +

@@ -14,32 +14,37 @@ class RectangleActivity : AppCompatActivity() {
         initView()
     }
 
-
     private fun initView() {
         bt_triangle?.setOnClickListener {
-            var intent = Intent(this, RectangleRenderActivity::class.java)
-            intent.putExtra("name", Triangle::class.java)
-            startActivity(intent)
+            startActivity(Triangle::class.java)
         }
         bt_equilateral_triangle?.setOnClickListener {
-            var intent = Intent(this, RectangleRenderActivity::class.java)
-            intent.putExtra("name", EquilateralTriangle::class.java)
-            startActivity(intent)
+            startActivity(EquilateralTriangle::class.java)
         }
         bt_equilateral_triangle_color?.setOnClickListener {
-            var intent = Intent(this, RectangleRenderActivity::class.java)
-            intent.putExtra("name", EquilateralTriangleColor::class.java)
-            startActivity(intent)
+            startActivity(EquilateralTriangleColor::class.java)
         }
         bt_square?.setOnClickListener {
-            var intent = Intent(this, RectangleRenderActivity::class.java)
-            intent.putExtra("name", Square::class.java)
-            startActivity(intent)
+            startActivity(Square::class.java)
         }
         bt_oval?.setOnClickListener {
-            var intent = Intent(this, RectangleRenderActivity::class.java)
-            intent.putExtra("name", Oval::class.java)
-            startActivity(intent)
+            startActivity(Oval::class.java)
+        }
+        bt_cube?.setOnClickListener {
+            startActivity(Cube::class.java)
+        }
+        bt_cone?.setOnClickListener {
+            startActivity(Cone::class.java)
         }
     }
+
+    /**
+     * 启动activity
+     */
+    private fun startActivity(clazz: Class<out Shape>) {
+        var intent = Intent(this, RectangleRenderActivity::class.java)
+        intent.putExtra("name", clazz)
+        startActivity(intent)
+    }
+
 }

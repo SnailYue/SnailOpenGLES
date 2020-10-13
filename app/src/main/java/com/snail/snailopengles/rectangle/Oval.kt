@@ -40,7 +40,6 @@ class Oval : Shape {
     private val vertexStride: Int = 0
     private var mMatrixHandler: Int = 0
     private var radius: Float = 1.0f
-    private var n: Int = 360
     private var shapePos: FloatArray? = null
     private var height: Float = 0.0f
     private var color: FloatArray = floatArrayOf(1f, 1f, 1f, 1f)
@@ -72,7 +71,7 @@ class Oval : Shape {
         data.add(0f)
         data.add(0f)
         data.add(height)
-        var angleDesSpan = 360f / n
+        var angleDesSpan = 360f / 360
 
         var i = 0f
         while (i < 360 + angleDesSpan) {
@@ -117,5 +116,9 @@ class Oval : Shape {
         GLES20.glUniform4fv(mColorHandle, 1, color, 0)
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, shapePos!!.size / 3)
         GLES20.glDisableVertexAttribArray(mPositionHandle)
+    }
+
+    fun setMatrix(matrix : FloatArray) {
+        this.mMVPMatrix = matrix
     }
 }

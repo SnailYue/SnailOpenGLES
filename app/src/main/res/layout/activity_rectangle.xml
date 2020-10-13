@@ -46,4 +46,20 @@
         android:layout_marginTop="20dp"
         android:text="圆形" />
 
+    <Button
+        android:id="@+id/bt_cube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="正方体" />
+
+    <Button
+        android:id="@+id/bt_cone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="圆锥" />
+
 </LinearLayout>
