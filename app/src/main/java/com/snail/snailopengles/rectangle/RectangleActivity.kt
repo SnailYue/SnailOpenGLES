@@ -36,6 +36,9 @@ class RectangleActivity : AppCompatActivity() {
         bt_cone?.setOnClickListener {
             startActivity(Cone::class.java)
         }
+        bt_cylinder?.setOnClickListener {
+            startActivity(Cylinder::class.java)
+        }
     }
 
     /**

@@ -75,6 +75,9 @@ class Oval : Shape {
 
         var i = 0f
         while (i < 360 + angleDesSpan) {
+            /**
+             * 计算坐标点
+             */
             data.add((radius * Math.sin(i * Math.PI / 180f)).toFloat())
             data.add((radius * Math.cos(i * Math.PI / 180f)).toFloat())
             data.add(height)
@@ -88,9 +91,13 @@ class Oval : Shape {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        /**
+         * 计算宽高比
+         */
         var ratio: Float = width.toFloat() / height
         Matrix.frustumM(mProjectMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
         Matrix.setLookAtM(mViewMatrix, 0, 0f, 0f, 7f, 0f, 0f, 0f, 0f, 1f, 0f)
@@ -118,7 +125,7 @@ class Oval : Shape {
         GLES20.glDisableVertexAttribArray(mPositionHandle)
     }
 
-    fun setMatrix(matrix : FloatArray) {
+    fun setMatrix(matrix: FloatArray) {
         this.mMVPMatrix = matrix
     }
 }
