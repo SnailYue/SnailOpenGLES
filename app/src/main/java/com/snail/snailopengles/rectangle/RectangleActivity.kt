@@ -36,5 +36,10 @@ class RectangleActivity : AppCompatActivity() {
             intent.putExtra("name", Square::class.java)
             startActivity(intent)
         }
+        bt_oval?.setOnClickListener {
+            var intent = Intent(this, RectangleRenderActivity::class.java)
+            intent.putExtra("name", Oval::class.java)
+            startActivity(intent)
+        }
     }
 }

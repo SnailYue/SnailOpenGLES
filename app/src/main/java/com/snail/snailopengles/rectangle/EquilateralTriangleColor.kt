@@ -63,7 +63,7 @@ class EquilateralTriangleColor : Shape {
         vertexBuffer?.put(triangleCoords)
         vertexBuffer?.position(0)
 
-        var bb2 = ByteBuffer.allocateDirect(triangleCoords.size * 4)
+        var bb2 = ByteBuffer.allocateDirect(color.size * 4)
         bb2.order(ByteOrder.nativeOrder())
         colorBuffer = bb2.asFloatBuffer()
         colorBuffer?.put(color)
