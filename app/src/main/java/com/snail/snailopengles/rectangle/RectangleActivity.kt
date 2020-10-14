@@ -42,6 +42,9 @@ class RectangleActivity : AppCompatActivity() {
         bt_ball?.setOnClickListener {
             startActivity(Ball::class.java)
         }
+        bt_ball_with_light?.setOnClickListener {
+            startActivity(BallWithLight::class.java)
+        }
     }
 
     /**
