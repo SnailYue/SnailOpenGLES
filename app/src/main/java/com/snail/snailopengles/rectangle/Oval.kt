@@ -3,6 +3,7 @@ package com.snail.snailopengles.rectangle
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.view.View
+import com.snail.snailopengles.utls.ShaderUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -12,19 +13,6 @@ import javax.microedition.khronos.opengles.GL10
 class Oval : Shape {
 
     private var vertexBuffer: FloatBuffer? = null
-
-    private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
-                "uniform mat4 vMatrix;" +
-                "void main() {" +
-                "   gl_Position = vMatrix * vPosition;" +
-                "}"
-    private val fragmentShaderCode =
-        "precision mediump float;" +
-                "uniform vec4 vColor;" +
-                "void main() { " +
-                "   gl_FragColor = vColor;" +
-                "}"
 
     private var mProject: Int = 0
 
@@ -56,13 +44,6 @@ class Oval : Shape {
         vertexBuffer = bb.asFloatBuffer()
         vertexBuffer?.put(shapePos)
         vertexBuffer?.position(0)
-        var vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        var fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-
-        mProject = GLES20.glCreateProgram()
-        GLES20.glAttachShader(mProject, vertexShader)
-        GLES20.glAttachShader(mProject, fragmentShader)
-        GLES20.glLinkProgram(mProject)
     }
 
 
@@ -91,7 +72,9 @@ class Oval : Shape {
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        mProject =
+            ShaderUtils.createProgram(mView!!.resources, "vshader/Oval.glsl", "fshader/Oval.glsl")
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

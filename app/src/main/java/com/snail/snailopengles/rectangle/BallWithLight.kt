@@ -34,24 +34,17 @@ class BallWithLight : Shape {
 
     private fun createPos(): FloatArray {
         var data = arrayListOf<Float>()
-        var r1: Float = 0f
-        var r2: Float = 0f
-        var h1: Float = 0f
-        var h2: Float = 0f
-        var sin: Float = 0f
-        var cos: Float = 0f
         var i: Float = -90f
-
         while (i < 90 + step) {
-            r1 = Math.cos(i * Math.PI / 180.0).toFloat()
-            r2 = Math.cos((i + step) * Math.PI / 180.0).toFloat()
-            h1 = Math.sin(i * Math.PI / 180.0).toFloat()
-            h2 = Math.sin((i + step) * Math.PI / 180.0).toFloat()
+            var r1 = Math.cos(i * Math.PI / 180.0).toFloat()
+            var r2 = Math.cos((i + step) * Math.PI / 180.0).toFloat()
+            var h1 = Math.sin(i * Math.PI / 180.0).toFloat()
+            var h2 = Math.sin((i + step) * Math.PI / 180.0).toFloat()
             var step2 = step * 2
             var j: Float = 0.0f
             while (j < 360.0f + step) {
-                cos = Math.cos(j * Math.PI / 180.0).toFloat()
-                sin = Math.sin(j * Math.PI / 180.0).toFloat()
+                var cos = Math.cos(j * Math.PI / 180.0).toFloat()
+                var sin = Math.sin(j * Math.PI / 180.0).toFloat()
                 data.add(r2 * cos)
                 data.add(h2)
                 data.add(r2 * sin)

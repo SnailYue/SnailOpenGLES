@@ -3,6 +3,7 @@ package com.snail.snailopengles.rectangle
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.view.View
+import com.snail.snailopengles.utls.ShaderUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -15,19 +16,6 @@ class Square : Shape {
     private var vertexBuffer: FloatBuffer? = null
     private var indexBuffer: ShortBuffer? = null
 
-    private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
-                "uniform mat4 vMatrix;" +
-                "void main() {" +
-                "   gl_Position = vMatrix * vPosition;" +
-                "}"
-
-    private val fragmentShaderCode =
-        "precision mediump float;" +
-                "uniform vec4 vColor;" +
-                "void main() {" +
-                "   gl_FragColor = vColor;" +
-                "}"
     private var mProject: Int = 0
 
     private val COORDS_PER_VERTEX = 3
@@ -67,17 +55,15 @@ class Square : Shape {
         indexBuffer = bb2.asShortBuffer()
         indexBuffer?.put(index)
         indexBuffer?.position(0)
-
-        var vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        var fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-
-        mProject = GLES20.glCreateProgram()
-        GLES20.glAttachShader(mProject, vertexShader)
-        GLES20.glAttachShader(mProject, fragmentShader)
-        GLES20.glLinkProgram(mProject)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        mProject = ShaderUtils.createProgram(
+            mView!!.resources,
+            "vshader/Square.glsl",
+            "fshader/Square.glsl"
+        )
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

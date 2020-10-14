@@ -1,3 +1,4 @@
+//fragmentShader没有默认的精度，所以需要设置设置精度
 precision mediump float;
 varying vec4 vDiffuse;
 

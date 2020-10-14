@@ -3,6 +3,7 @@ package com.snail.snailopengles.rectangle
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.view.View
+import com.snail.snailopengles.utls.ShaderUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -12,20 +13,6 @@ import javax.microedition.khronos.opengles.GL10
 class EquilateralTriangle : Shape {
 
     private lateinit var vertexBuffer: FloatBuffer
-
-    private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
-                "uniform mat4 vMatrix;" +
-                "void main() {" +
-                "  gl_Position = vMatrix*vPosition;" +
-                "}"
-
-    private val fragmentShaderCode =
-        "precision mediump float;" +
-                "uniform vec4 vColor;" +
-                "void main() {" +
-                "  gl_FragColor = vColor;" +
-                "}"
 
     private var mProgram: Int = 0
 
@@ -64,20 +51,15 @@ class EquilateralTriangle : Shape {
         vertexBuffer = bb.asFloatBuffer()
         vertexBuffer.put(triangleCoords)
         vertexBuffer.position(0)
-        var vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        var fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-        //创建一个空的OpenGLES程序
-        mProgram = GLES20.glCreateProgram()
-        //将顶点着色器加入到程序
-        GLES20.glAttachShader(mProgram, vertexShader)
-        //将偏远着色器加入到程序
-        GLES20.glAttachShader(mProgram, fragmentShader)
-        //连接到着色器程序
-        GLES20.glLinkProgram(mProgram)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        mProgram = ShaderUtils.createProgram(
+            mView!!.resources,
+            "vshader/EquilateralTriangle.glsl",
+            "fshader/EquilateralTriangle.glsl"
+        )
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

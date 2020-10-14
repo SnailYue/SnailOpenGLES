@@ -3,6 +3,7 @@ package com.snail.snailopengles.rectangle
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.view.View
+import com.snail.snailopengles.utls.ShaderUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -14,24 +15,9 @@ class EquilateralTriangleColor : Shape {
     private var vertexBuffer: FloatBuffer? = null
     private var colorBuffer: FloatBuffer? = null
 
-    private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
-                "uniform mat4 vMatrix;" +
-                "varying vec4 vColor;" +
-                "attribute vec4 aColor;" +
-                "void main() { " +
-                "   gl_Position = vMatrix * vPosition;" +
-                "   vColor = aColor;" +
-                "}"
-    private val fragmentShaderCode =
-        "precision mediump float;" +
-                "varying vec4 vColor;" +
-                "void main() {" +
-                "   gl_FragColor = vColor;" +
-                "}"
-
     private var mProgram: Int = 0
     private val COORDS_PER_VERTEX = 3
+
     private val triangleCoords =
         floatArrayOf(
             0.5f, 0.5f, 0.0f,
@@ -69,17 +55,15 @@ class EquilateralTriangleColor : Shape {
         colorBuffer?.put(color)
         colorBuffer?.position(0)
 
-        var vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
-        var fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
-
-        mProgram = GLES20.glCreateProgram()
-        GLES20.glAttachShader(mProgram, vertexShader)
-        GLES20.glAttachShader(mProgram, fragmentShader)
-        GLES20.glLinkProgram(mProgram)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        mProgram = ShaderUtils.createProgram(
+            mView!!.resources,
+            "vshader/EquilateralTriangleColor.glsl",
+            "fshader/EquilateralTriangleColor.glsl"
+        )
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {

@@ -3,6 +3,7 @@ package com.snail.snailopengles.rectangle
 import android.opengl.GLES20
 import android.opengl.Matrix
 import android.view.View
+import com.snail.snailopengles.utls.ShaderUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -15,24 +16,9 @@ class Cube : Shape {
     private var vertexBuffer: FloatBuffer
     private var colorBuffer: FloatBuffer
     private var indexBuffer: ShortBuffer
-    private val vertexShaderCode = "attribute vec4 vPosition;" +
-            "uniform mat4 vMatrix;" +
-            "varying  vec4 vColor;" +
-            "attribute vec4 aColor;" +
-            "void main() {" +
-            "  gl_Position = vMatrix*vPosition;" +
-            "  vColor=aColor;" +
-            "}"
-
-    private val fragmentShaderCode = "precision mediump float;" +
-            "varying vec4 vColor;" +
-            "void main() {" +
-            "  gl_FragColor = vColor;" +
-            "}"
 
     private var mProgram = 0
 
-    val COORDS_PER_VERTEX = 3
     val cubePositions = floatArrayOf(
         -1.0f, 1.0f, 1.0f,  //正面左上0
         -1.0f, -1.0f, 1.0f,  //正面左下1
@@ -72,12 +58,6 @@ class Cube : Shape {
 
     private var mMatrixHandler = 0
 
-    //顶点个数
-    private val vertexCount = cubePositions.size / COORDS_PER_VERTEX
-
-    //顶点之间的偏移量
-    private val vertexStride = COORDS_PER_VERTEX * 4 // 每个顶点四个字节
-
 
     constructor(view: View) : super(view) {
         var bb = ByteBuffer.allocateDirect(
@@ -101,27 +81,13 @@ class Cube : Shape {
         indexBuffer = cc.asShortBuffer()
         indexBuffer.put(index)
         indexBuffer.position(0)
-        val vertexShader = loadShader(
-            GLES20.GL_VERTEX_SHADER,
-            vertexShaderCode
-        )
-        val fragmentShader = loadShader(
-            GLES20.GL_FRAGMENT_SHADER,
-            fragmentShaderCode
-        )
-        //创建一个空的OpenGLES程序
-        mProgram = GLES20.glCreateProgram()
-        //将顶点着色器加入到程序
-        GLES20.glAttachShader(mProgram, vertexShader)
-        //将片元着色器加入到程序中
-        GLES20.glAttachShader(mProgram, fragmentShader)
-        //连接到着色器程序
-        GLES20.glLinkProgram(mProgram)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         //开启深度测试
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+        mProgram =
+            ShaderUtils.createProgram(mView!!.resources, "vshader/Cube.glsl", "fshader/Cube.glsl")
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
