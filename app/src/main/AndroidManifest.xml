@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".rectangle.RectangleRenderActivity"></activity>
+        <activity android:name=".image.SGLViewActivity"></activity>
+        <activity android:name=".rectangle.RectangleRenderActivity" />
         <activity android:name=".rectangle.RectangleActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
