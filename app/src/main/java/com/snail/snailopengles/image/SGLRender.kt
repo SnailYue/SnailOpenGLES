@@ -9,9 +9,12 @@ import com.snail.snailopengles.image.filter.ContrastColorFilter
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+/**
+ * 自定义Render
+ */
 class SGLRender : GLSurfaceView.Renderer {
     private lateinit var mFilter: AFilter
-    private lateinit var bitmap: Bitmap
+    private var bitmap: Bitmap? = null
     private var width: Int = 0
     private var height: Int = 0
     private var refreshFlag: Boolean = false
@@ -25,13 +28,13 @@ class SGLRender : GLSurfaceView.Renderer {
         refreshFlag = true
         mFilter = filter
         bitmap?.let {
-            mFilter.setBitmap(bitmap)
+            mFilter.setBitmap(it)
         }
     }
 
     fun setImageBuffer(buffer: IntArray, width: Int, height: Int) {
         bitmap = Bitmap.createBitmap(buffer, width, height, Bitmap.Config.RGB_565)
-        mFilter.setBitmap(bitmap)
+        mFilter.setBitmap(bitmap!!)
     }
 
     fun refresh() {

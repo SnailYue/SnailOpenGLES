@@ -13,6 +13,9 @@ import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
+/**
+ * 滤镜抽象类
+ */
 abstract class AFilter : GLSurfaceView.Renderer {
     private lateinit var mContext: Context
     private var mProgram: Int = 0
@@ -38,10 +41,16 @@ abstract class AFilter : GLSurfaceView.Renderer {
     private var mMVPMatrix: FloatArray = FloatArray(16)
 
     private val sPos = floatArrayOf(
-        -1f, 1f, -1f, -1f, 1f, 1f, 1f, -1f
+        -1f, 1f,
+        -1f, -1f,
+        1f, 1f,
+        1f, -1f
     )
     private val sCoord = floatArrayOf(
-        0f, 0f, 0f, 1f, 1f, 0f, 1f, 1f
+        0f, 0f,
+        0f, 1f,
+        1f, 0f,
+        1f, 1f
     )
 
     constructor(context: Context, vertex: String, fragment: String) {

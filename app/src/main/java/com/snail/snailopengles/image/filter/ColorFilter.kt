@@ -28,6 +28,9 @@ class ColorFilter : AFilter {
         hChangeColor = GLES20.glGetUniformLocation(program, "vChangeColor")
     }
 
+    /**
+     * 滤镜类型枚举
+     */
     enum class Filter {
         NONE(0, floatArrayOf(0f, 0f, 0f)),
         GRAY(1, floatArrayOf(0.299f, 0.587f, 0.114f)),

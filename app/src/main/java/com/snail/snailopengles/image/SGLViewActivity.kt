@@ -25,27 +25,32 @@ class SGLViewActivity : AppCompatActivity() {
             sglv_view.getRender().refresh()
             render()
         }
-
+        //原图
         bt_original?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.NONE))
             render()
         }
+        //黑白
         bt_black_white?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.GRAY))
             render()
         }
+        //冷色调
         bt_cool?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.COOL))
             render()
         }
+        //暖色调
         bt_warm?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.WARM))
             render()
         }
+        //模糊
         bt_blurry?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.BLUR))
             render()
         }
+        //放大镜
         bt_magnifier?.setOnClickListener {
             sglv_view?.setFilter(ContrastColorFilter(this, ColorFilter.Filter.MAGN))
             render()
